@@ -13,6 +13,8 @@ function Call() {
   const {
     localAudioTrack, localVideoTrack, leave, join, joinState, remoteUsers
   } = useAgora(client);
+  const [isAudio, setIsAudio] = useState(true);
+  const [isVideo, setIsVideo] = useState(true);
   useEffect(()=>{
     if(!appid || !token || !channel) return;
     join(appid, channel, token);
@@ -42,12 +44,15 @@ function Call() {
         <div className='local-player-wrapper'>
           <p className='local-player-text'>{localVideoTrack && `localTrack`}{joinState && localVideoTrack ? `(${client.uid})` : ''}</p>
           <MediaPlayer videoTrack={localVideoTrack} audioTrack={undefined}></MediaPlayer>
-          <button onClick={()=> {console.log(localVideoTrack)}}>{'Print video track'}</button>
-          <button onClick={()=> {console.log(localAudioTrack)}}>{'Print audio track'}</button>
-          <button onClick={()=> {localVideoTrack?.setEnabled(false)}}>{"Video Turn off"}</button>
-          <button onClick={()=> {localVideoTrack?.setEnabled(true)}}>{"Video Turn on"}</button>
-          <button onClick={()=> {localAudioTrack?.setEnabled(false)}}>{"Audio Turn off"}</button>
-          <button onClick={()=> {localAudioTrack?.setEnabled(true)}}>{"Audio Turn on"}</button>
+          <button onClick={()=> {
+            localVideoTrack?.setEnabled(!localVideoTrack?.enabled)
+            setIsVideo(!isVideo);
+          }}>
+          {isVideo ? "Video Turn off" : "Video turn on"}</button>
+          <button onClick={()=> {
+            localAudioTrack?.setEnabled(!localAudioTrack?.enabled);
+            setIsAudio(!isAudio);
+          }}>{isAudio ? "Audio Turn off" : "Audio turn on"}</button>
         </div>
         {remoteUsers.map(user => (<div className='remote-player-wrapper' key={user.uid}>
             <p className='remote-player-text'>{`remoteVideo(${user.uid})`}</p>
