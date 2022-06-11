@@ -8,7 +8,7 @@ const client = AgoraRTC.createClient({ codec: 'h264', mode: 'rtc' });
 
 function Call() {
   const [ appid, setAppid ] = useState('ea1dbfc4feab4310ad5a494d48fcee07');
-  const [ token, setToken ] = useState('006ea1dbfc4feab4310ad5a494d48fcee07IAAG/dUKIxHba/BKje5IoLWyEFLfWDo4rWvdlu2y73iAdoAO3FUAAAAAEABUm4+spjukYgEAAQCmO6Ri');
+  const [ token, setToken ] = useState('006ea1dbfc4feab4310ad5a494d48fcee07IABR+H+SC192OSW5w1466ykD0JtUbvOjyTUNPVqmN2m6KYAO3FUAAAAAEABUm4+skL6lYgEAAQCQvqVi');
   const [ channel, setChannel ] = useState('demo1');
   const {
     localAudioTrack, localVideoTrack, leave, join, joinState, remoteUsers
@@ -44,6 +44,8 @@ function Call() {
         <div className='local-player-wrapper'>
           <p className='local-player-text'>{localVideoTrack && `localTrack`}{joinState && localVideoTrack ? `(${client.uid})` : ''}</p>
           <MediaPlayer videoTrack={localVideoTrack} audioTrack={undefined}></MediaPlayer>
+          {/*<button onClick={()=> {console.log(localVideoTrack)}}>{'Print video track'}</button>*/}
+          {/*<button onClick={()=> {console.log(localAudioTrack)}}>{'Print audio track'}</button>*/}
           <button onClick={()=> {
             localVideoTrack?.setEnabled(!localVideoTrack?.enabled)
             setIsVideo(!isVideo);
