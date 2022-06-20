@@ -6,19 +6,21 @@ import './Call.css';
 
 const client = AgoraRTC.createClient({ codec: 'h264', mode: 'rtc' });
 
+
 function Call() {
-  const [ appid, setAppid ] = useState('ea1dbfc4feab4310ad5a494d48fcee07');
-  const [ token, setToken ] = useState('006ea1dbfc4feab4310ad5a494d48fcee07IABR+H+SC192OSW5w1466ykD0JtUbvOjyTUNPVqmN2m6KYAO3FUAAAAAEABUm4+skL6lYgEAAQCQvqVi');
-  const [ channel, setChannel ] = useState('demo1');
+  const [ appid, setAppid ] = useState('b360a98acb90400bbea96a8b2cf0394c');
+  const [ token, setToken ] = useState('');
+  const [ channel, setChannel ] = useState('demo2');
+  const [ name, setName ] = useState('Akash');
   const {
-    localAudioTrack, localVideoTrack, leave, join, joinState, remoteUsers
+    localAudioTrack, localVideoTrack, leave, join, joinState, remoteUsers, RTMJoin
   } = useAgora(client);
   const [isAudio, setIsAudio] = useState(true);
   const [isVideo, setIsVideo] = useState(true);
-  useEffect(()=>{
-    if(!appid || !token || !channel) return;
-    join(appid, channel, token);
-  },[])
+  // useEffect(()=>{
+  //   if(!appid || !token || !channel) return;
+  //   join(appid, channel, token);
+  // },[])
 
   return (
     <div className='call'>
@@ -35,8 +37,13 @@ function Call() {
           Channel:
           <input type='text' name='channel' value={channel} onChange={(event) => { setChannel(event.target.value) }} />
         </label>
+        <label>
+          Name(optional):
+          <input type='text' name='channel' value={name} onChange={(event) => { setName(event.target.value) }} />
+        </label>
         <div className='button-group'>
           <button id='join' type='button' className='btn btn-primary btn-sm' disabled={joinState} onClick={() => {join(appid, channel, token)}}>Join</button>
+          {/*<button id='join' type='button' className='btn btn-primary btn-sm' onClick={() => {RTMJoin()}}>RTM Join</button>*/}
           <button id='leave' type='button' className='btn btn-primary btn-sm' disabled={!joinState} onClick={() => {leave()}}>Leave</button>
         </div>
       </form>

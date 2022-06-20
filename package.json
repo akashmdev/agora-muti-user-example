@@ -11,6 +11,7 @@
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "agora-rtc-sdk-ng": "^4.8.2",
+    "agora-rtm-sdk": "^1.4.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",

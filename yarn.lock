@@ -2103,6 +2103,11 @@ agora-rte-extension@^1.0.22:
   resolved "https://registry.yarnpkg.com/agora-rte-extension/-/agora-rte-extension-1.0.23.tgz#54a7215fd2cdcf2553d83570530950054f1e59a6"
   integrity sha512-X2cGBg+L5ZJIFU91qvMASvRsBfg1HXTktVG3YROw9wxHsILSI7jgF9R9XraLc3fNX/UjovaYAlUW+hiJe0v6Xw==
 
+agora-rtm-sdk@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/agora-rtm-sdk/-/agora-rtm-sdk-1.4.5.tgz#a7d9d55b0821bc6858d23ff837319f4d7d2c8a99"
+  integrity sha512-uVRxKmQpbWyIk7Z+5hCREhgY95LJDYl67vLZu9cklb7p8ja9dqvzVHeS62nnYtM1oJCQPdtaMTW/cbU1qdxU7g==
+
 ajv-errors@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ajv-errors/-/ajv-errors-1.0.1.tgz#f35986aceb91afadec4102fbd85014950cefa64d"

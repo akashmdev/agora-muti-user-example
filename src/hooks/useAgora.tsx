@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import AgoraRTC, {
   IAgoraRTCClient, IAgoraRTCRemoteUser, MicrophoneAudioTrackInitConfig, CameraVideoTrackInitConfig, IMicrophoneAudioTrack, ICameraVideoTrack, ILocalVideoTrack, ILocalAudioTrack } from 'agora-rtc-sdk-ng';
+import AgoraRTM, { RtmClient } from 'agora-rtm-sdk';
 
 export default function useAgora(client: IAgoraRTCClient | undefined)
   :
@@ -10,6 +11,7 @@ export default function useAgora(client: IAgoraRTCClient | undefined)
       joinState: boolean,
       leave: Function,
       join: Function,
+      RTMJoin: Function,
       remoteUsers: IAgoraRTCRemoteUser[],
     }
     {
@@ -26,6 +28,33 @@ export default function useAgora(client: IAgoraRTCClient | undefined)
     setLocalAudioTrack(microphoneTrack);
     setLocalVideoTrack(cameraTrack);
     return [microphoneTrack, cameraTrack];
+  }
+
+
+  let channel: import("agora-rtm-sdk").RtmChannel | null = null;
+
+  async function RTMJoin(name: string = 'Qutayba Yaseen') {
+    const clientRTM = AgoraRTM.createInstance('b360a98acb90400bbea96a8b2cf0394c', {enableLogUpload: false});
+    var isLoggedIn = false;
+
+    let accountName = name;
+
+    clientRTM.login({uid: accountName}).then(() => {
+      console.log('AgoraRTM client login success. Username: ' + accountName);
+      isLoggedIn = true;
+      // RTM Channel Join
+      var channelName = 'demo2';
+      channel = clientRTM.createChannel(channelName);
+        channel.join().then(() => {
+          console.log('AgoraRTM client channel join success.', channel);
+          // Get all members in RTM Channel
+          channel?.getMembers().then((memberNames: any) => {
+            console.log("------------------------------");
+            console.log("All members in the channel are as follows: ");
+            console.log(memberNames);
+          });
+        });
+    });
   }
 
   async function join(appid: string, channel: string, token?: string, uid?: string | number | null) {
@@ -92,6 +121,7 @@ export default function useAgora(client: IAgoraRTCClient | undefined)
     joinState,
     leave,
     join,
+    RTMJoin,
     remoteUsers,
   };
 }
